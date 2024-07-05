@@ -1,10 +1,10 @@
 <header>
   <nav>
     <ul>
-      <li>
+      <li class="<%= path=='/' ? 'active' : '' %>">
         <a href="/">home page</a>
       </li>
-      <li>
+      <li class="<%= path=='/add' ? 'active' : '' %>">
         <a href="/add">Add products</a>
       </li>
     </ul>

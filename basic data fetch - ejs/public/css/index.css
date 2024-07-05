@@ -1,0 +1,85 @@
+* {
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+body {
+  background-color: antiquewhite;
+}
+
+nav {
+  background-color: #242424;
+}
+ul {
+  padding: 1rem;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+li a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: whitesmoke;
+  font-size: 20px;
+  font-weight: 500;
+}
+li {
+  padding: 0.5rem;
+  border-radius: 10px;
+  transition: all 300ms ease;
+}
+li:hover {
+  text-decoration: underline white;
+}
+.active {
+  background-color: aliceblue;
+}
+.active a {
+  color: #242424;
+}
+/**form************/
+form {
+  display: flex;
+  gap: 30px;
+  margin: 100px auto;
+  width: fit-content;
+}
+input {
+  width: 300px;
+  padding: 10px;
+  border-radius: 5px;
+}
+button {
+  width: 100px;
+  padding: 0.2rem 0.5rem;
+  background-color: #242424;
+  color: aliceblue;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #494949;
+}
+.container {
+  margin: 100px auto;
+  display: flex;
+  padding: 1rem;
+  border-radius: 20px;
+  flex-direction: column;
+  gap: 10px;
+  width: fit-content;
+  border: 3px dotted black;
+}
+.container p {
+  background-color: rgb(242, 242, 242);
+  padding: 1rem;
+  border-radius: inherit;
+  font-size: 19px;
+  font-weight: 400;
+  color: #494949;
+  text-transform: capitalize;
+}

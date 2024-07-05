@@ -1,9 +1,9 @@
 const express = require("express");
+
+const productController = require("../controllers/products");
+
 const router = express.Router();
 
-const adminRoute = require("./admin");
-router.get("/", (req, res) => {
-  res.render("home.ejs", { docTitle: "nAistam", data: adminRoute.data });
-});
+router.get("/", productController.getproducts);
 
 module.exports = router;

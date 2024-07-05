@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= docTitle %></title>
+    <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
-    <%- include('../layouts/navBar.ejs') %>
+    <%- include('./includes/navBar.ejs') %>
     <form action="/add" method="post">
       <input type="text" name="title" />
       <button>send</button>

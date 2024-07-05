@@ -4,13 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= docTitle%></title>
+    <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
-    <%- include('../layouts/navBar.ejs') %>
-    <p>
-     <% data.map((el)=>{ %>
-        <p><%= el.title %></p>
-     <% }) %>
-    </p>
+    <%- include('./includes/navBar.ejs') %>
+    <div class="container">
+      <% data.map((el)=>{ %>
+      <p><%= el.title %></p>
+
+      <% }) %>
+    </div>
   </body>
 </html>
