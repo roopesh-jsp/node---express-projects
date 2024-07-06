@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('./includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('./includes/navBar.ejs') %>
+    <div class="container">
+      <% data.map(el=>{%>
+      <div class="item">
+        <h1><%= el.title %></h1>
+        <p><%= el.discription %></p>
+        <span><%= el.price %></span>
+        <div class="cta">
+          <form action="/admin/edit?edit=true" method="post">
+            <button>edit</button>
+            <input type="hidden" name="id" value="<%= el.id %>" />
+          </form>
+          <form action="/admin/delete" method="post">
+            <button>delete</button>
+            <input type="hidden" name="id" value="<%= el.id %>" />
+          </form>
+        </div>
+      </div>
+      <%})%>
+    </div>
+  </body>
+</html>
