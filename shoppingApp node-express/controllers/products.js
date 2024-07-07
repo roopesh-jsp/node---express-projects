@@ -1,4 +1,5 @@
 const product = require("../models/product");
+const cart = require("../models/cart");
 
 exports.getproducts = (req, res, nxt) => {
   const xx = (data) => {
@@ -52,7 +53,6 @@ exports.getAdminData = (req, res) => {
 exports.getEdit = (req, res) => {
   const editMode = req.query.edit;
   const id = req.body.id;
-
   product.findProduct(id, (data) => {
     res.render("add-product.ejs", {
       docTitle: "add-product",
@@ -77,4 +77,42 @@ exports.postDel = (req, res) => {
   const id = req.body.id;
   product.del(id);
   res.redirect("/admin");
+};
+
+exports.addToCart = (req, res) => {
+  const id = req.body.id;
+  const isCartView = req.query.cart;
+  const isAdd = req.query.add;
+
+  product.findProduct(id, (pr) => {
+    if (isAdd) {
+      cart.addToCart(id, pr.price, pr.title);
+      if (!isCartView) {
+        res.redirect("/");
+      } else {
+        res.redirect("/cart");
+      }
+    } else {
+      cart.reduceCart(id, pr.price, pr.qnt);
+      res.redirect("/cart");
+    }
+  });
+};
+
+exports.getCart = (req, res) => {
+  cart.fethAll((cart) => {
+    res.render("cart.ejs", {
+      data: cart,
+      docTitle: "cart",
+      path: "/cart",
+    });
+  });
+};
+
+exports.removeCart = (req, res) => {
+  const id = req.body.id;
+  product.findProduct(id, (pr) => {
+    cart.removeCart(pr.id, pr.price, pr.qnt);
+    res.redirect("/cart");
+  });
 };

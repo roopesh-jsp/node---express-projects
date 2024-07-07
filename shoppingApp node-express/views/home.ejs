@@ -12,9 +12,15 @@
       <div class="item">
         <h1><%= el.title %></h1>
         <p><%= el.discription %></p>
-        <span><%= el.price %></span>
+        <span>price : <%= el.price %>/-</span>
 
-        <button><a href="/products/<%= el.id %>">view</a></button>
+        <div class="cta">
+          <button><a href="/products/<%= el.id %>">view</a></button>
+          <form action="/add-cart?add=true" method="post">
+            <button>add to cart</button>
+            <input type="hidden" name="id" value="<%=el.id%>" />
+          </form>
+        </div>
       </div>
       <%})%>
     </div>

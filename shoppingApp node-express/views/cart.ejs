@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('./includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('./includes/navBar.ejs') %>
+    <h1>cart</h1>
+    <div class="container">
+        <% data?.cartItems?.map(el=>{ %>
+            <div class="item">
+                <h3><%= el.title %></h3>
+              
+                <div class="cta">
+                  <form action="/add-cart?cart=true&add=true" method="post">
+                    <button>+</button>
+                    <input type="hidden" name="id" value="<%=el.id%>" />
+                  </form>
+                  <p>qnty : <%= el.qnt %></p>
+                  <form action="/add-cart?cart=true" method="post">
+                    <button>-</button>
+                    <input type="hidden" name="id" value="<%=el.id%>" />
+                  </form>
+                </div>
+                <form action="/remove-cart" method="post">
+                  <button>remove</button>
+                  <input type="hidden" name="id" value="<%=el.id%>" />
+                </form>
+                <span>price: <%= el.price %></span>
+            </div>
+      <%  }) %>
+    
+    </div>
+    <h4 class="total">total : <%= data.totalAmount %> /-</h4>
+    </div>
+  </body>
+</html>
