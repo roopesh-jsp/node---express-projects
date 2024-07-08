@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('./includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('./includes/navBar.ejs') %> <% if(edit){ %>
+    <form class="add-product" action="/admin/edit/<%= data.id %>" method="post">
+      <input
+        type="text"
+        name="title"
+        placeholder="title"
+        value="<%= data.title %>"
+      />
+      <input
+        type="text"
+        name="discription"
+        placeholder="discription"
+        value="<%= data.discription %>"
+      />
+      <input
+        type="number"
+        name="price"
+        placeholder="price"
+        value="<%= data.price %>"
+      />
+      <button><%= edit ? 'save' : 'add' %></button>
+    </form>
+    <% } else{ %>
+    <form class="add-product" action="/add-product" method="post">
+      <input type="text" name="title" placeholder="title" />
+      <input type="text" name="discription" placeholder="discription" />
+      <input type="number" name="price" placeholder="price" />
+      <button><%= edit ? 'save' : 'add' %></button>
+    </form>
+    <% }%>
+  </body>
+</html>

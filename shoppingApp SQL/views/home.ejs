@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('./includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('./includes/navBar.ejs') %>
+    <div class="container">
+      <% data.map(el=>{%>
+      <div class="item">
+        <h1><%= el.title %></h1>
+        <p><%= el.discription %></p>
+        <span>price : <%= el.price %>/-</span>
+
+        <div class="cta">
+          <button><a href="/products/<%= el.id %>">view</a></button>
+          <form action="/add-cart?add=true" method="post">
+            <button>add to cart</button>
+            <input type="hidden" name="id" value="<%=el.id%>" />
+          </form>
+        </div>
+      </div>
+      <%})%>
+    </div>
+  </body>
+</html>
