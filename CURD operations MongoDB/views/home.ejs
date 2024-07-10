@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <% data.map(el=>{ %>
+    <ul>
+      <li><%= el.title %></li>
+      <form action="/view" method="post">
+        <button>view</button>
+        <input type="hidden" name="id" value="<%= el._id %>" />
+      </form>
+      <form action="/add/edit?edit=true" method="post">
+        <button>edit</button>
+        <input type="hidden" name="id" value="<%= el._id %>" />
+      </form>
+      <form action="/del" method="post">
+        <button>del</button>
+        <input type="hidden" name="id" value="<%= el._id %>" />
+      </form>
+    </ul>
+    <% })%>
+  </body>
+</html>
