@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= docTitle %></title>
+  </head>
+  <body>
+    <%- include('./layouts/header.ejs') %> <% data.map(el=>{ %>
+    <div>
+      <span><%= el.title %></span>
+      <span><%= el.price %></span>
+    </div>
+    <% }) %>
+  </body>
+</html>
