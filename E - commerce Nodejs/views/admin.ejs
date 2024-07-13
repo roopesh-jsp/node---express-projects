@@ -1,24 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= docTitle %></title>
-  </head>
+<%- include('./layouts/head.ejs') %>
   <body>
-    <%- include('./layouts/header.ejs') %> <% data.map(el=>{ %>
-    <div>
-      <span><%= el.title %></span>
-      <span><%= el.price %></span>
-      <form action="/edit/<%=el._id%>" method="get">
-        <button>edit</button>
-      </form>
-
-      <form action="/del" method="post">
-        <button>delete</button>
-        <input type="hidden" name="id" value="<%=el._id%>" />
-      </form>
+    <%- include('./layouts/header.ejs') %> <div class="container">
+      <% data.map(el=>{ %>
+        <div class="product">
+          <span><%= el.title %></span>
+          <span><%= el.price %></span>
+         <div class="cta">
+          <form action="/edit/<%=el._id%>" method="get">
+            <button>edit</button>
+          </form>
+          <form action="/del" method="post">
+            <button>delete</button>
+            <input type="hidden" name="id" value="<%=el._id%>" />
+          </form>
+         </div>
+        </div>
+        <% }) %>
     </div>
-    <% }) %>
   </body>
 </html>

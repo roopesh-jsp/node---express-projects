@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+header {
+  background-color: rgb(37, 37, 37);
+  padding: 10px 20px;
+}
+header nav ul {
+  display: flex;
+  list-style-type: none;
+  gap: 20px;
+}
+header nav ul li {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+}
+header nav ul li:hover {
+  background-color: rgb(65, 65, 65);
+}
+header nav ul li a {
+  color: rgb(242, 242, 242);
+  text-decoration: none;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 100px auto;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.product {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid grey;
+  padding: 10px;
+  border-radius: 6px;
+  flex-basis: 230px;
+  align-items: center;
+  gap: 5px;
+}
+.cta {
+  display: flex;
+  gap: 10px;
+}
+button {
+  padding: 5px 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 17px;
+  border-radius: 5px;
+  background-color: #343434;
+  color: whitesmoke;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #656565;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: 100px auto;
+  gap: 10px;
+}
+
+.form input {
+  width: 300px;
+  border-radius: 2px;
+  padding: 10px;
+}
+.form input:focus {
+  outline: none;
+}
+.form button {
+  width: fit-content;
+}
