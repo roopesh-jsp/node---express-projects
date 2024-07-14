@@ -18,7 +18,14 @@ exports.getAddProduct = (req, res) => {
 exports.postAddProduct = (req, res) => {
   const title = req.body.title;
   const price = req.body.price;
-  const pr = new product({ title: title, price: price });
+  const discription = req.body.discription;
+  const image = req.body.image;
+  const pr = new product({
+    title: title,
+    price: price,
+    discription: discription,
+    image: image,
+  });
   pr.save().then(() => {
     res.redirect("/");
   });
@@ -53,7 +60,6 @@ exports.GetEdit = (req, res) => {
 
 exports.PostEdit = (req, res) => {
   const id = req.body.id;
-  console.log(id);
   const title = req.body.title;
   const price = req.body.price;
   product
@@ -67,4 +73,14 @@ exports.PostEdit = (req, res) => {
     .then(() => {
       res.redirect("/admin");
     });
+};
+
+exports.GetView = (req, res) => {
+  const id = req.params.id;
+  product.findById(id).then((pr) => {
+    res.render("view.ejs", {
+      data: pr,
+      docTitle: "product-view",
+    });
+  });
 };

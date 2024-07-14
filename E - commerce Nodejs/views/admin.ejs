@@ -3,8 +3,12 @@
     <%- include('./layouts/header.ejs') %> <div class="container">
       <% data.map(el=>{ %>
         <div class="product">
-          <span><%= el.title %></span>
-          <span><%= el.price %></span>
+         
+            <img src="<%=el.image%>" alt="img of product">
+            <h2><%= el.title %></h2>
+            <h4>price : <%= el.price %>/-</h4>
+            <p><%=el.discription%></p>
+          
          <div class="cta">
           <form action="/edit/<%=el._id%>" method="get">
             <button>edit</button>

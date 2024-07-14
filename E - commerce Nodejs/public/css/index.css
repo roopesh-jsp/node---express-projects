@@ -44,11 +44,18 @@ header nav ul li a {
   border-radius: 6px;
   flex-basis: 230px;
   align-items: center;
+  justify-content: space-between;
   gap: 5px;
+}
+.product img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
 }
 .cta {
   display: flex;
   gap: 10px;
+  margin: 10px 0;
 }
 button {
   padding: 5px 10px;
@@ -82,4 +89,42 @@ button:hover {
 }
 .form button {
   width: fit-content;
+}
+
+.input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.input label {
+  text-transform: capitalize;
+  font-size: 20px;
+}
+.input label::after {
+  content: ":";
+}
+.view-container {
+  flex-direction: column;
+  margin: 0 auto;
+  width: fit-content;
+}
+.view-container h1 {
+  text-decoration: dashed;
+  text-transform: capitalize;
+  font-size: 22px;
+  font-weight: 600;
+}
+.view-container img {
+  height: 300px;
+  width: 60%;
+  object-fit: cover;
+}
+.view-container p {
+  font-size: 19px;
+  font-weight: 400;
+}
+.view-container h4 {
+  font-size: 21px;
+  font-weight: 500;
 }

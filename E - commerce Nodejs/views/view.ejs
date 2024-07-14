@@ -1,0 +1,11 @@
+<%- include('./layouts/head.ejs') %>
+  <body>
+    <%- include('./layouts/header.ejs') %> 
+    <div class="container view-container">
+        <h1><%=data.title%></h1>
+        <img src="<%=data.image%>" alt="product image" class="large-image">   
+        <p><%=data.discription%></p>
+        <h4><%=data.price%></h4>
+    </div>
+  </body>
+</html>
