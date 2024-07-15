@@ -2,11 +2,15 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 
 exports.getHome = (req, res) => {
-  res.render("home.ejs");
+  res.render("home.ejs", {
+    isAuth: req.session.isLogedIn,
+  });
 };
 
 exports.getView = (req, res) => {
-  res.render("view.ejs");
+  res.render("view.ejs", {
+    user: req.session.user,
+  });
 };
 
 exports.getSignIn = (req, res) => {
@@ -62,7 +66,10 @@ exports.postLogIn = (req, res) => {
           .then((match) => {
             if (match) {
               req.session.isLogedIn = true;
-              res.redirect("/");
+              req.session.user = x;
+              req.session.save((err) => {
+                res.redirect("/");
+              });
             } else {
               res.redirect("/logIn");
             }
@@ -78,8 +85,8 @@ exports.postLogIn = (req, res) => {
 };
 
 exports.Logout = (req, res, next) => {
-  res.cookie("cookie", "", {
-    expires: new Date(Date.now()),
+  req.session.destroy((err) => {
+    console.log(err);
+    res.redirect("/");
   });
-  return res.status(200).json({ message: "User Logout Successfully" });
 };
