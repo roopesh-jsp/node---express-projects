@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <%items.map(el=>{%>
+      <div class="item">
+        <h1><%=el.title%></h1>
+        <form method="post" action="/download/<%=el._id%>" class="img">
+          <img src="<%=el.image%>" alt="image " />
+          <button>S</button>
+        </form>
+        <p><%=el.discription%></p>
+      </div>
+      <% })%>
+    </div>
+  </body>
+</html>
