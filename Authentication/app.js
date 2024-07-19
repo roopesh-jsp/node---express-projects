@@ -4,6 +4,10 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const sessions = require("express-session");
 const mongoDbStore = require("connect-mongodb-session")(sessions);
+const csrf = require("csurf");
+const flash = require("connect-flash");
+
+const csrfProtection = csrf();
 
 const app = express();
 
@@ -21,6 +25,15 @@ app.use(
     }),
   })
 );
+
+app.use(csrfProtection);
+
+app.use((req, res, nxt) => {
+  res.locals.csrfToken = req.csrfToken();
+  nxt();
+});
+
+app.use(flash());
 
 app.set("engine view", "ejs");
 app.set("views", "views");

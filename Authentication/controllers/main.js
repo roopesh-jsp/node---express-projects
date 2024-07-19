@@ -49,13 +49,13 @@ exports.postSignIn = (req, res) => {
 exports.getLogIn = (req, res) => {
   res.render("auth.ejs", {
     signIn: false,
+    error: req.flash("err")[0],
   });
 };
 
 exports.postLogIn = (req, res) => {
   const email = req.body.email;
   const pass = req.body.password;
-  console.log(email, pass);
   User.findOne({ email: email })
     .then((x) => {
       if (!x) {
@@ -71,7 +71,7 @@ exports.postLogIn = (req, res) => {
                 res.redirect("/");
               });
             } else {
-              res.redirect("/logIn");
+              req.flash("err", "invalid crediantials");
             }
           })
           .catch((err) => {

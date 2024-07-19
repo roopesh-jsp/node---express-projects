@@ -18,7 +18,13 @@
         placeholder="reEnter password"
       />
       <%}%>
+    
       <button>create</button>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
     </form>
+    <h1><%=error%></h1>
+    <%if(error){%>
+      <h1>haii</h1>
+    <%}%>
   </body>
 </html>

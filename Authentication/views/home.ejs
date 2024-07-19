@@ -12,5 +12,6 @@
     <%if(isAuth){%>
     <button><a href="/view">view</a></button>
     <%}%>
+    <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
   </body>
 </html>
