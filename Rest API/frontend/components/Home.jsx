@@ -1,9 +1,10 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [data, setData] = useState([]);
-
+  const navigate = useNavigate();
   function fetchData() {
     fetch("http://localhost:8080/posts")
       .then((res) => {
@@ -16,6 +17,14 @@ export default function Home() {
   useEffect(() => {
     fetchData();
   }, []);
+  function handleDel(id) {
+    axios
+      .delete("http://localhost:8080/delete/" + id)
+      .then((x) => {
+        fetchData();
+      })
+      .catch((err) => console.log(err));
+  }
   return (
     <>
       <main>
@@ -29,7 +38,11 @@ export default function Home() {
           <div key={idx}>
             <h1>
               {" "}
-              <Link to={`/post/${el._id}`}>{el.title}</Link>{" "}
+              <Link to={`/post/${el._id}`}>{el.title}</Link>
+              <button>
+                <Link to={`/update/${el._id}`}>update</Link>
+              </button>
+              <button onClick={() => handleDel(el._id)}>del</button>
             </h1>
           </div>
         ))}

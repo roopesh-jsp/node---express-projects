@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function AddPost() {
+export default function UpdatePost() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [dis, setDis] = useState("");
+
   function handleSubmit(e) {
     e.preventDefault();
     axios

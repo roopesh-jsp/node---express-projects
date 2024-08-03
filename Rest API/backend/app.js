@@ -44,4 +44,36 @@ app.get("/post/:id", (req, res) => {
     })
     .catch((err) => console.log(err));
 });
+
+app.get("/users/:id", (req, res) => {
+  const id = new mongoose.Types.ObjectId(req.params.id);
+  userModal
+    .findById(id)
+    .then((x) => res.json(x))
+    .catch((err) => console.log(err));
+});
+
+app.put("/update/:id", (req, res) => {
+  const id = new mongoose.Types.ObjectId(req.params.id);
+  userModal
+    .findByIdAndUpdate(id, {
+      title: req.body.title,
+      discription: req.body.discription,
+    })
+    .then((x) => res.json(x))
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+app.delete("/delete/:id", (req, res) => {
+  const id = new mongoose.Types.ObjectId(req.params.id);
+  userModal
+    .findByIdAndDelete(id)
+    .then((x) => res.json(x))
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 app.listen(8080);
