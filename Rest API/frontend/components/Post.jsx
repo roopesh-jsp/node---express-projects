@@ -21,7 +21,6 @@ export default function Post() {
 
   return (
     <div>
-      <h1>haa</h1>
       <h1>{postData[0]?.title}</h1>
       <h3>{postData[0]?.discription}</h3>
     </div>

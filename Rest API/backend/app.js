@@ -11,38 +11,40 @@ const bodyParser = require("body-parser");
 //   res.setHeader("Acess-Control-Allow-Headers", "*");
 //   next();
 // });
-app.use(cors());
-app.get("/posts", (req, res) => {
-  userModal
-    .find({})
-    .then((users) => res.json(users))
-    .catch((err) => {
-      console.log(err);
-    });
-});
+
 app.use(bodyParser.json());
+app.use(cors());
 
 mongoose.connect(
   "mongodb+srv://rupesh:1234@backenddb.itmt8yo.mongodb.net/shop?retryWrites=true&w=majority&appName=backendDB"
 );
-app.post("/create", (req, res) => {
+
+app.get("/posts", async (req, res) => {
+  try {
+    const us = await userModal.find({});
+    res.json(us);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.post("/create", async (req, res) => {
   const user = new userModal({
     title: req.body.title,
     discription: req.body.discription,
   });
-  user.save().then((x) => res.json(x));
+  await user.save().then((x) => res.json(x));
 });
 
-app.get("/post/:id", (req, res) => {
+app.get("/post/:id", async (req, res) => {
   const id = new mongoose.Types.ObjectId(req.params);
 
-  userModal
-    .findById(id)
-    .then((x) => {
-      console.log(x);
-      return res.json(x);
-    })
-    .catch((err) => console.log(err));
+  try {
+    const user = await userModal.findById(id);
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.get("/users/:id", (req, res) => {
@@ -53,27 +55,27 @@ app.get("/users/:id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.put("/update/:id", (req, res) => {
+app.put("/update/:id", async (req, res) => {
   const id = new mongoose.Types.ObjectId(req.params.id);
-  userModal
-    .findByIdAndUpdate(id, {
+  try {
+    const user = await userModal.findByIdAndUpdate(id, {
       title: req.body.title,
       discription: req.body.discription,
-    })
-    .then((x) => res.json(x))
-    .catch((err) => {
-      console.log(err);
     });
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
-app.delete("/delete/:id", (req, res) => {
+app.delete("/delete/:id", async (req, res) => {
   const id = new mongoose.Types.ObjectId(req.params.id);
-  userModal
-    .findByIdAndDelete(id)
-    .then((x) => res.json(x))
-    .catch((err) => {
-      console.log(err);
-    });
+  try {
+    const user = await userModal.findByIdAndDelete(id);
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.listen(8080);
