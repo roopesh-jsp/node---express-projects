@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-// const cros = require("cros");
+const cors = require("cors");
 
 const app = express();
 
@@ -9,7 +9,7 @@ const bookRoutes = require("./routes/booksRoutes");
 
 app.use(bodyParser.json());
 
-// app.use(cros());
+app.use(cors());
 
 app.use(bookRoutes);
 
