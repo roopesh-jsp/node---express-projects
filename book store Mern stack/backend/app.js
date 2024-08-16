@@ -9,7 +9,19 @@ const bookRoutes = require("./routes/booksRoutes");
 
 app.use(bodyParser.json());
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["get", "post"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Acess-Control-Allow-Methods", "get,post,delete,put,patch");
+//   res.setHeader("Acess-Control-Allow-Headers", "Content-Type, Authorization");
+//   next();
+// });
 
 app.use(bookRoutes);
 

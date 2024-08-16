@@ -29,8 +29,9 @@ export default function Books() {
       {books.map((book, idx) => {
         return (
           <div key={book._id} className="book">
-            <h1>{book.title}</h1>
-
+            <h1>
+              <span>{book.title}</span>
+            </h1>
             <h4>
               <span className="sideHead">Author : </span>
               <span className="cont">{book.author}</span>

@@ -19,6 +19,8 @@ exports.addBook = (req, res, nxt) => {
   const title = req.body.title;
   const author = req.body.author;
   const publishedYr = req.body.publishedYr;
+  console.log(req.body);
+
   const newBook = new Books({
     title,
     author,
