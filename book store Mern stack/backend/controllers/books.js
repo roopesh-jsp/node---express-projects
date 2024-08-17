@@ -67,6 +67,8 @@ exports.editBook = (req, res, nxt) => {
 };
 
 exports.deleteBook = (req, res, nxt) => {
+  console.log("deleting...");
+
   const id = req.params.bookId;
   Books.findByIdAndDelete(id)
     .then(() => {

@@ -1,4 +1,6 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Books() {
   const [books, setBooks] = useState([]);
@@ -24,6 +26,14 @@ export default function Books() {
   //   getMeals();
   // }, []);
 
+  function handleDelete(id) {
+    axios
+      .delete(`http://localhost:3000/${id}`)
+      .then((res) => {})
+      .cathh((err) => console.log(err));
+    getBooks();
+  }
+
   return (
     <div className="container">
       {books.map((book, idx) => {
@@ -40,6 +50,14 @@ export default function Books() {
               <span className="sideHead">published on : </span>
               <span className="cont">{book.publishedYr}</span>
             </h4>
+            <div className="cta">
+              <Link to={`/book/${book._id}`}>
+                <button className="btn-1">view</button>
+              </Link>
+              <button className="btn-2" onClick={() => handleDelete(book._id)}>
+                delete
+              </button>
+            </div>
           </div>
         );
       })}

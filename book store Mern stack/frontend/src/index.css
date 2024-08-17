@@ -50,6 +50,7 @@ nav a {
 }
 .book h1 {
   text-transform: uppercase;
+  margin: 10px auto;
   font-size: 20px;
   background-color: rgb(28, 139, 28);
   width: fit-content;
@@ -74,4 +75,26 @@ nav a {
 .cont {
   font-size: 18px;
   font-weight: 400;
+}
+.cta {
+  display: flex;
+  margin: 20px auto;
+  /* justify-content: space-between; */
+  gap: 10px;
+}
+.cta button {
+  padding: 5px 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  color: whitesmoke;
+  border-radius: 5px;
+}
+.btn-1 {
+  background-color: rgb(141, 141, 234);
+}
+.btn-2 {
+  background-color: rgb(225, 91, 91);
 }
