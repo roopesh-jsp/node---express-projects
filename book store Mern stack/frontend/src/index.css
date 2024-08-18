@@ -98,3 +98,35 @@ nav a {
 .btn-2 {
   background-color: rgb(225, 91, 91);
 }
+
+/** book -page **/
+.bookPg {
+  display: flex;
+  margin: 20px auto;
+  padding: 50px;
+}
+.stack {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stack h1 {
+  font-weight: 600;
+  font-size: 50px;
+  text-transform: uppercase;
+}
+.stack h2 {
+  font-size: 30px;
+  font-weight: 500;
+}
+.stack h3 {
+  font-size: 22px;
+  font-weight: 400;
+}
+.bookPg button {
+  height: fit-content;
+  padding: 10px 20px;
+}

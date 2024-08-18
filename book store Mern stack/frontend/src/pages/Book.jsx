@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function Book() {
   const [book, setBook] = useState();
@@ -18,17 +18,19 @@ export default function Book() {
   useEffect(() => {
     getBook();
   }, []);
-
+  function handleEdit() {}
   return (
     <div className="bookPg">
       {book && (
         <div className="stack">
           <h1>{book.title}</h1>
           <h2>{book.author}</h2>
-          <h2>published year : {book.publishedYr}</h2>
+          <h3>published year : {book.publishedYr}</h3>
         </div>
       )}
-      <button>edit</button>
+      <Link to={`/edit/${id}?edit=true`}>
+        <button>edit</button>
+      </Link>
     </div>
   );
 }
