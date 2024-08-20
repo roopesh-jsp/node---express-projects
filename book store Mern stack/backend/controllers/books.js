@@ -49,8 +49,6 @@ exports.getBook = (req, res, nxt) => {
 };
 
 exports.editBook = (req, res, nxt) => {
-  console.log(req.body);
-
   const id = req.params.bookId;
   const title = req.body.title;
   const author = req.body.author;
