@@ -27,13 +27,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(bookRoutes);
 app.use(authRoutes);
+app.use(bookRoutes);
 
 app.use((err, req, res, nxt) => {
   const status = err.statusCode || 500;
-  console.log("k");
-
+  console.log(err);
   res.status(status).json({ message: err.message });
 });
 

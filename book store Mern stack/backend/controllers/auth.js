@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 exports.signup = (req, res, nxt) => {
   const err = validationResult(req);
@@ -36,4 +37,40 @@ exports.signup = (req, res, nxt) => {
         });
     }
   });
+};
+
+exports.login = (req, res, nxt) => {
+  const { email, password } = req.body;
+  console.log(email);
+
+  let activeUser;
+  User.findOne({ email: email })
+    .then((user) => {
+      if (!user) {
+        const error = new Error(" email not registered");
+        error.statusCode = 500;
+        throw error;
+      }
+      activeUser = user;
+      return bcrypt.compare(password, user.password);
+    })
+    .then((isequal) => {
+      if (!isequal) {
+        const error = new Error("wrong credintials");
+        error.statusCode = 500;
+        throw error;
+      }
+      res.json({
+        _id: activeUser._id,
+        email: activeUser.email,
+        name: activeUser.name,
+        token: jwt.sign({ id: activeUser._id }, "secret", { expiresIn: "1d" }),
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+
+      err.message = "failed to login ...";
+      nxt(err);
+    });
 };

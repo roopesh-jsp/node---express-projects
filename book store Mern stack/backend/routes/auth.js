@@ -15,4 +15,6 @@ route.post(
   authController.signup
 );
 
+route.post("/login", authController.login);
+
 module.exports = route;
