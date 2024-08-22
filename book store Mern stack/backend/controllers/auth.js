@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const books = require("../models/book");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -73,4 +74,24 @@ exports.login = (req, res, nxt) => {
       err.message = "failed to login ...";
       nxt(err);
     });
+};
+
+//to be donee
+exports.getBooks = (req, res, nxt) => {
+  // User.findById(req.user._id)
+  //   .populate("books")
+  //   .then((user) => {
+  //     console.log(user.books);
+  //     res.json({
+  //       data: user.books,
+  //       msg: "sent",
+  //     });
+  //   });
+
+  books.find({ _id: { $in: req.user.books } }).then((books) => {
+    res.json({
+      data: books,
+      msg: "sent",
+    });
+  });
 };

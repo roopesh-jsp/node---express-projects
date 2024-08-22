@@ -27,8 +27,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(authRoutes);
-app.use(bookRoutes);
+app.use("/user", authRoutes);
+app.use("/books", bookRoutes);
 
 app.use((err, req, res, nxt) => {
   const status = err.statusCode || 500;

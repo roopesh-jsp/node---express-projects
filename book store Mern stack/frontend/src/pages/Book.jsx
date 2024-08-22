@@ -7,7 +7,7 @@ export default function Book() {
   const { id } = useParams();
   function getBook() {
     axios
-      .get(`http://localhost:3000/${id}`)
+      .get(`http://localhost:3000/books/${id}`)
       .then((res) => {
         setBook(res.data);
       })

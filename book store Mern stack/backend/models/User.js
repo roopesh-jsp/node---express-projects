@@ -16,10 +16,10 @@ const UserSchema = new mongoose.Schema({
   },
   books: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Books",
+      bookId: { type: mongoose.Schema.Types.ObjectId, ref: "books" },
     },
   ],
+  // books: [{ type: mongoose.Schema.Types.ObjectId, ref: "Books" }],
 });
 
 module.exports = mongoose.model("User", UserSchema);

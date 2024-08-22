@@ -1,4 +1,5 @@
 const Books = require("../models/book");
+const User = require("../models/User");
 
 exports.getBooks = (req, res, nxt) => {
   Books.find({})
@@ -19,21 +20,35 @@ exports.addBook = (req, res, nxt) => {
   const title = req.body.title;
   const author = req.body.author;
   const publishedYr = req.body.publishedYr;
-  console.log(req.body);
-
+  let id;
   const newBook = new Books({
     title,
     author,
     publishedYr,
+    creator: req.user._id,
   });
-  newBook.save().then(() => {
-    res.json({ message: "booksaved" });
-  });
+  newBook
+    .save()
+    .then((res) => {
+      return User.findById(req.user._id);
+    })
+    .then((user) => {
+      user.books.push(newBook);
+      return user.save();
+    })
+    .then((x) => {
+      res.json({ message: "booksaved" });
+    })
+    .catch((err) => {
+      err.message = "failed to add the book";
+      nxt(err);
+    });
 };
 
 exports.getBook = (req, res, nxt) => {
   const id = req.params.bookId;
   Books.findById(id)
+    .populate("creator", "email")
     .then((book) => {
       if (!book) {
         const err = new Error();
@@ -67,12 +82,20 @@ exports.editBook = (req, res, nxt) => {
 };
 
 exports.deleteBook = (req, res, nxt) => {
-  console.log("deleting...");
-
   const id = req.params.bookId;
   Books.findByIdAndDelete(id)
     .then(() => {
       res.json({ message: "book deleted" });
+      return User.findById(req.user._id);
+    })
+    .then((user) => {
+      user.books = user.books.filter(
+        (bk) => bk._id.toString() !== id.toString()
+      );
+      return user.save();
+    })
+    .then(() => {
+      console.log("deleted");
     })
     .catch((err) => {
       nxt(err);

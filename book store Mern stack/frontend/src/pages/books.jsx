@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Books() {
   const [books, setBooks] = useState([]);
   function getBooks() {
-    fetch("http://localhost:3000")
+    fetch("http://localhost:3000/books")
       .then((res) => {
         return res.json();
       })
@@ -28,7 +28,7 @@ export default function Books() {
 
   function handleDelete(id) {
     axios
-      .delete(`http://localhost:3000/${id}`)
+      .delete(`http://localhost:3000/books/${id}`)
       .then((res) => {})
       .cathh((err) => console.log(err));
     getBooks();

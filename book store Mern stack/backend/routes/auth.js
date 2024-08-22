@@ -5,6 +5,7 @@ const { body } = require("express-validator");
 
 const User = require("../models/User");
 const authController = require("../controllers/auth");
+const protect = require("../middleware/protect");
 
 route.post(
   "/signup",
@@ -16,5 +17,7 @@ route.post(
 );
 
 route.post("/login", authController.login);
+
+route.get("/books", protect, authController.getBooks);
 
 module.exports = route;

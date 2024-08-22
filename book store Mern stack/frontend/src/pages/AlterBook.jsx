@@ -21,12 +21,16 @@ export default function AlterBook() {
     if (!edit) {
       const formdata = new FormData(e.currentTarget);
       const data = Object.fromEntries(formdata);
-      axios.post("http://localhost:3000/add", { ...data }).then((res) => {
+      axios.post("http://localhost:3000/books/add", { ...data }).then((res) => {
         navigate("/");
       });
     } else {
       axios
-        .put(`http://localhost:3000/${id}`, { title, author, publishedYr: yr })
+        .put(`http://localhost:3000/books/${id}`, {
+          title,
+          author,
+          publishedYr: yr,
+        })
         .then((res) => {
           navigate(`/book/${id}`);
         })
