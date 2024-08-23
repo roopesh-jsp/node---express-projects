@@ -1,12 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Signup() {
+  const navigate = useNavigate();
   function handleSubmit(e) {
     e.preventDefault();
     const formdata = new FormData(e.currentTarget);
     const data = Object.fromEntries(formdata);
     console.log(data);
+
+    axios
+      .post("http://localhost:3000/user/signup", {
+        email: data.email,
+        name: data.name,
+        password: data.password,
+      })
+      .then((res) => {
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   return (
     <div className="form">

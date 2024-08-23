@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../store/AuthContext";
 
 export default function Books() {
   const [books, setBooks] = useState([]);
+  const { token } = useAuth();
   function getBooks() {
     fetch("http://localhost:3000/books")
       .then((res) => {
@@ -27,10 +29,11 @@ export default function Books() {
   // }, []);
 
   function handleDelete(id) {
+    const headers = { Authorization: `Bearer ${token}` };
     axios
-      .delete(`http://localhost:3000/books/${id}`)
+      .delete(`http://localhost:3000/books/${id}`, { headers })
       .then((res) => {})
-      .cathh((err) => console.log(err));
+      .catch((err) => console.log(err));
     getBooks();
   }
 

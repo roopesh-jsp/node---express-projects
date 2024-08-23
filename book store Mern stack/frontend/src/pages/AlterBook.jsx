@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../store/AuthContext";
 export default function AlterBook() {
   const [data, setData] = useState();
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [yr, setYr] = useState("");
+
+  const { token } = useAuth();
 
   const location = useLocation();
   const querParms = new URLSearchParams(location.search);
@@ -18,19 +21,27 @@ export default function AlterBook() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const headers = { Authorization: `Bearer ${token}` };
     if (!edit) {
       const formdata = new FormData(e.currentTarget);
       const data = Object.fromEntries(formdata);
-      axios.post("http://localhost:3000/books/add", { ...data }).then((res) => {
-        navigate("/");
-      });
+
+      axios
+        .post("http://localhost:3000/books/add", { ...data }, { headers })
+        .then((res) => {
+          navigate("/");
+        });
     } else {
       axios
-        .put(`http://localhost:3000/books/${id}`, {
-          title,
-          author,
-          publishedYr: yr,
-        })
+        .put(
+          `http://localhost:3000/books/${id}`,
+          {
+            title,
+            author,
+            publishedYr: yr,
+          },
+          { headers }
+        )
         .then((res) => {
           navigate(`/book/${id}`);
         })
@@ -39,7 +50,7 @@ export default function AlterBook() {
   }
 
   function getData() {
-    axios.get(`http://localhost:3000/${id}`).then((res) => {
+    axios.get(`http://localhost:3000/books/${id}`).then((res) => {
       setTitle(res.data.title);
       setAuthor(res.data.author);
       setYr(res.data.publishedYr);
