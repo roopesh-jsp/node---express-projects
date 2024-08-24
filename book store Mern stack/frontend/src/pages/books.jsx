@@ -5,7 +5,8 @@ import { useAuth } from "../store/AuthContext";
 
 export default function Books() {
   const [books, setBooks] = useState([]);
-  const { token } = useAuth();
+  const { getCookie } = useAuth();
+  const { token } = getCookie();
   function getBooks() {
     fetch("http://localhost:3000/books")
       .then((res) => {
@@ -39,31 +40,36 @@ export default function Books() {
 
   return (
     <div className="container">
-      {books.map((book, idx) => {
-        return (
-          <div key={book._id} className="book">
-            <h1>
-              <span>{book.title}</span>
-            </h1>
-            <h4>
-              <span className="sideHead">Author : </span>
-              <span className="cont">{book.author}</span>
-            </h4>
-            <h4>
-              <span className="sideHead">published on : </span>
-              <span className="cont">{book.publishedYr}</span>
-            </h4>
-            <div className="cta">
-              <Link to={`/book/${book._id}`}>
-                <button className="btn-1">view</button>
-              </Link>
-              <button className="btn-2" onClick={() => handleDelete(book._id)}>
-                delete
-              </button>
+      {books.length === 0 && <h1>no books found</h1>}
+      {books &&
+        books.map((book, idx) => {
+          return (
+            <div key={book._id} className="book">
+              <h1>
+                <span>{book.title}</span>
+              </h1>
+              <h4>
+                <span className="sideHead">Author : </span>
+                <span className="cont">{book.author}</span>
+              </h4>
+              <h4>
+                <span className="sideHead">published on : </span>
+                <span className="cont">{book.publishedYr}</span>
+              </h4>
+              <div className="cta">
+                <Link to={`/book/${book._id}`}>
+                  <button className="btn-1">view</button>
+                </Link>
+                <button
+                  className="btn-2"
+                  onClick={() => handleDelete(book._id)}
+                >
+                  delete
+                </button>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </div>
   );
 }

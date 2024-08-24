@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../store/AuthContext";
 
 export default function Header() {
-  const { user, logout } = useAuth();
+  const { getCookie, logout } = useAuth();
+  const { token, name } = getCookie();
+
+  console.log(name);
+
   return (
     <nav>
       <Link to="/">
@@ -15,11 +19,12 @@ export default function Header() {
           {" "}
           <button>ADD</button>
         </Link>
+        <Link to="/mybooks">My books</Link>
 
         <div className="userAuth">
-          {user ? (
+          {token ? (
             <>
-              <p>{user}</p>
+              <p>{name}</p>
               <button onClick={logout}>logout</button>
             </>
           ) : (

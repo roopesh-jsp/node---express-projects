@@ -9,7 +9,8 @@ export default function AlterBook() {
   const [author, setAuthor] = useState("");
   const [yr, setYr] = useState("");
 
-  const { token } = useAuth();
+  const { getCookie } = useAuth();
+  const { token } = getCookie();
 
   const location = useLocation();
   const querParms = new URLSearchParams(location.search);

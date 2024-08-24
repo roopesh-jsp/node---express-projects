@@ -18,7 +18,6 @@ export default function Book() {
   useEffect(() => {
     getBook();
   }, []);
-  function handleEdit() {}
   return (
     <div className="bookPg">
       {book && (

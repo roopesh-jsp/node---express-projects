@@ -3,9 +3,9 @@ import { useAuth } from "./store/AuthContext";
 import Protector from "./pages/auth/Protector";
 
 export default function RouteProtector({ children }) {
-  const { user } = useAuth();
-
-  if (!user) {
+  const { getCookie } = useAuth();
+  const { token } = getCookie();
+  if (!token) {
     return <Protector />;
   }
   return <>{children}</>;

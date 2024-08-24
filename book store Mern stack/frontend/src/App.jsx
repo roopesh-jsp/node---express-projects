@@ -9,6 +9,7 @@ import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import AuthContext from "./store/AuthContext";
 import RouteProtector from "./RouteProtector";
+import Mybooks from "./pages/Mybooks";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -42,6 +43,7 @@ const routes = createBrowserRouter([
       },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
+      { path: "/mybooks", element: <Mybooks /> },
     ],
   },
 ]);

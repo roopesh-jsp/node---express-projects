@@ -4,10 +4,10 @@ const User = require("../models/User");
 exports.getBooks = (req, res, nxt) => {
   Books.find({})
     .then((books) => {
-      if (books.length === 0) {
-        res.json({ message: "no books found" });
-        return;
-      }
+      // if (books.length === 0) {
+      //   res.json({ message: "no books found" });
+      //   return;
+      // }
       res.status(200).json(books);
     })
     .catch((err) => {
@@ -83,18 +83,24 @@ exports.editBook = (req, res, nxt) => {
 
 exports.deleteBook = (req, res, nxt) => {
   const id = req.params.bookId;
+  console.log(id);
+
   Books.findByIdAndDelete(id)
     .then(() => {
       res.json({ message: "book deleted" });
       return User.findById(req.user._id);
     })
     .then((user) => {
-      user.books = user.books.filter(
-        (bk) => bk._id.toString() !== id.toString()
-      );
+      user.books = user.books.filter((bk) => {
+        console.log(bk._id.toString());
+
+        return bk._id.toString() !== id.toString();
+      });
       return user.save();
     })
-    .then(() => {
+    .then((x) => {
+      console.log(x);
+
       console.log("deleted");
     })
     .catch((err) => {
