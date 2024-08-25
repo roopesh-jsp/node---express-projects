@@ -10,6 +10,7 @@ import Signup from "./pages/auth/Signup";
 import AuthContext from "./store/AuthContext";
 import RouteProtector from "./RouteProtector";
 import Mybooks from "./pages/Mybooks";
+import { Toaster } from "react-hot-toast";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -43,13 +44,21 @@ const routes = createBrowserRouter([
       },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
-      { path: "/mybooks", element: <Mybooks /> },
+      {
+        path: "/mybooks",
+        element: (
+          <RouteProtector>
+            <Mybooks />
+          </RouteProtector>
+        ),
+      },
     ],
   },
 ]);
 export default function App() {
   return (
     <AuthContext>
+      <Toaster position="bottom-center" toastOptions={{ duration: 2000 }} />
       <RouterProvider router={routes} />;
     </AuthContext>
   );

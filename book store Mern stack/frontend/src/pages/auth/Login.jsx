@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/AuthContext";
 import axios from "axios";
+import toast from "react-hot-toast";
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -16,10 +17,14 @@ export default function Login() {
           password: data.password,
         })
         .then((res) => {
-          login(res.data.name, res.data.token);
+          if (res.data.error) {
+            toast.error(res.data.error);
+          } else {
+            toast.success(res.data.sucess);
+            login(res.data.name, res.data.token);
+            navigate("/", { replace: true });
+          }
         });
-
-      navigate("/", { replace: true });
     }
   }
   return (

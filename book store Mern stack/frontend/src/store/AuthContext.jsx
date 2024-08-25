@@ -10,10 +10,12 @@ export default function AuthContext({ children }) {
 
   function login(username, token) {
     const decode = jwtDecode(token);
+
     Cookie.remove("jwt-token");
     Cookie.remove("name");
     Cookie.set("name", username);
     Cookie.set("jwt-token", token);
+    Cookie.set("userId", decode.id);
     setAuth({
       name: Cookie.get("name"),
       token: Cookie.get("jwt-token"),
@@ -24,12 +26,14 @@ export default function AuthContext({ children }) {
     return {
       name: Cookie.get("name"),
       token: Cookie.get("jwt-token"),
+      userId: Cookie.get("userId"),
     };
   }
 
   function logout() {
     Cookie.remove("jwt-token");
     Cookie.remove("name");
+    Cookie.remove("userId");
     setAuth({});
   }
 

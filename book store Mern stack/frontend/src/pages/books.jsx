@@ -29,15 +29,6 @@ export default function Books() {
   //   getMeals();
   // }, []);
 
-  function handleDelete(id) {
-    const headers = { Authorization: `Bearer ${token}` };
-    axios
-      .delete(`http://localhost:3000/books/${id}`, { headers })
-      .then((res) => {})
-      .catch((err) => console.log(err));
-    getBooks();
-  }
-
   return (
     <div className="container">
       {books.length === 0 && <h1>no books found</h1>}
@@ -60,12 +51,12 @@ export default function Books() {
                 <Link to={`/book/${book._id}`}>
                   <button className="btn-1">view</button>
                 </Link>
-                <button
+                {/* <button
                   className="btn-2"
                   onClick={() => handleDelete(book._id)}
                 >
                   delete
-                </button>
+                </button> */}
               </div>
             </div>
           );

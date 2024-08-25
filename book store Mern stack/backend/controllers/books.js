@@ -64,10 +64,24 @@ exports.getBook = (req, res, nxt) => {
 };
 
 exports.editBook = (req, res, nxt) => {
+  console.log(req.body);
+
+  const userId = req.body.userId;
+
   const id = req.params.bookId;
   const title = req.body.title;
   const author = req.body.author;
   const publishedYr = req.body.publishedYr;
+  // let creator;
+  // Books.findById(id).then((bk) => {
+  //   creator = bk.creator.toString();
+  // });
+  // if (creator !== userId) {
+  //   console.log("kk");
+  //   console.log(creator, userId);
+
+  //   return res.json({ error: "you are not authorized" });
+  // }
   Books.findByIdAndUpdate(id, {
     title,
     author,

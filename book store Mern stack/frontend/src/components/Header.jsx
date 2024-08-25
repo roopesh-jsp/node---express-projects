@@ -6,8 +6,6 @@ export default function Header() {
   const { getCookie, logout } = useAuth();
   const { token, name } = getCookie();
 
-  console.log(name);
-
   return (
     <nav>
       <Link to="/">

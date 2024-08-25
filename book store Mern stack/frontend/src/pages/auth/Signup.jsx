@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -8,7 +9,6 @@ export default function Signup() {
     e.preventDefault();
     const formdata = new FormData(e.currentTarget);
     const data = Object.fromEntries(formdata);
-    console.log(data);
 
     axios
       .post("http://localhost:3000/user/signup", {
@@ -17,7 +17,14 @@ export default function Signup() {
         password: data.password,
       })
       .then((res) => {
-        navigate("/login");
+        if (res.data.error) {
+          console.log(res.data.error);
+          toast.error(res.data.error);
+        } else {
+          console.log(res.data.sucess);
+          toast.success(res.data.sucess);
+          navigate("/login");
+        }
       })
       .catch((err) => {
         console.log(err);
