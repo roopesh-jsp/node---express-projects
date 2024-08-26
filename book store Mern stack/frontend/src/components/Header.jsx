@@ -13,11 +13,15 @@ export default function Header() {
         <h1>books</h1>
       </Link>
       <div className="navbar">
-        <Link to="/add">
-          {" "}
-          <button>ADD</button>
-        </Link>
-        <Link to="/mybooks">My books</Link>
+        {token && (
+          <>
+            <Link to="/add">
+              {" "}
+              <button>ADD</button>
+            </Link>
+            <Link to="/mybooks">My books</Link>
+          </>
+        )}
 
         <div className="userAuth">
           {token ? (
@@ -26,7 +30,9 @@ export default function Header() {
               <button onClick={logout}>logout</button>
             </>
           ) : (
-            <Link to="/login">login/signin</Link>
+            <Link to="/login" className="login">
+              login/signin
+            </Link>
           )}
         </div>
       </div>

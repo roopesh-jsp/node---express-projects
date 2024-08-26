@@ -12,7 +12,7 @@ export default function Login() {
     const data = Object.fromEntries(formdata);
     if (data.email.trim() != "") {
       axios
-        .post("http://localhost:3000/user/login", {
+        .post("/user/login", {
           email: data.email,
           password: data.password,
         })
@@ -28,14 +28,17 @@ export default function Login() {
     }
   }
   return (
-    <div className="form">
+    <div className="form stack">
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">E mail</label>
-        <input type="email" name="email" id="email" />
-        <label htmlFor="password">password</label>
-        <input type="password" name="password" id="password" />
-
+        <div className="group">
+          <label htmlFor="email">E mail</label>
+          <input type="email" name="email" id="email" />
+        </div>
+        <div className="group">
+          <label htmlFor="password">password</label>
+          <input type="password" name="password" id="password" />
+        </div>
         <div className="cta">
           <button>logIn</button>
           <Link to="/signup">didn't have a account ?</Link>

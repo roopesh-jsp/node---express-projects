@@ -13,7 +13,7 @@ export default function Mybooks() {
     setLoading(true);
     const headers = { Authorization: `Bearer ${token}` };
     axios
-      .get("http://localhost:3000/user/books", { headers })
+      .get("user/books", { headers })
       .then((res) => {
         setBooks(res.data.data);
         setLoading(false);
@@ -30,7 +30,7 @@ export default function Mybooks() {
   function handleDelete(id) {
     const headers = { Authorization: `Bearer ${token}` };
     axios
-      .delete(`http://localhost:3000/books/${id}`, { headers })
+      .delete(`books/${id}`, { headers })
       .then((res) => {})
       .catch((err) => console.log(err));
     getData();
@@ -38,8 +38,14 @@ export default function Mybooks() {
 
   return (
     <>
-      {loading && <h1>Loading ... </h1>}
-      {books.length === 0 && <h1>no books </h1>}
+      {loading && <h1 className="center">Loading ... </h1>}
+      {books.length === 0 && (
+        <h1 className="center">
+          you have no books <br /> add now
+          <br />
+          <Link to="/add"> add books </Link>
+        </h1>
+      )}
       <div className="container">
         {books.map((book, idx) => {
           return (

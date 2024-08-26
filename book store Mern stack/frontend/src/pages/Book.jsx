@@ -12,7 +12,7 @@ export default function Book() {
 
   function getBook() {
     axios
-      .get(`http://localhost:3000/books/${id}`)
+      .get(`books/${id}`)
       .then((res) => {
         setBook(res.data);
       })

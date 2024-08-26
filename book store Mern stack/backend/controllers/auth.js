@@ -78,7 +78,9 @@ exports.login = async (req, res, nxt) => {
       _id: user._id,
       email: user.email,
       name: user.name,
-      token: jwt.sign({ id: user._id }, "secret", { expiresIn: "1d" }),
+      token: jwt.sign({ id: user._id }, process.env.JWT_SECRECT, {
+        expiresIn: "1d",
+      }),
       sucess: "logged in",
     });
   } catch (err) {

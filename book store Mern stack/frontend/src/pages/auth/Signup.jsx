@@ -11,7 +11,7 @@ export default function Signup() {
     const data = Object.fromEntries(formdata);
 
     axios
-      .post("http://localhost:3000/user/signup", {
+      .post("user/signup", {
         email: data.email,
         name: data.name,
         password: data.password,
@@ -31,15 +31,22 @@ export default function Signup() {
       });
   }
   return (
-    <div className="form">
+    <div className="form stack">
       <h1>signup</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">E mail</label>
-        <input type="email" name="email" id="email" />
-        <label htmlFor="password">password</label>
-        <input type="password" name="password" id="password" />
-        <label htmlFor="name">Name</label>
-        <input type="text" name="name" id="name" />
+        <div className="group">
+          <label htmlFor="email">E mail</label>
+          <input type="email" name="email" id="email" />
+        </div>
+        <div className="group">
+          <label htmlFor="password">password</label>
+          <input type="password" name="password" id="password" />
+        </div>
+        <div className="group">
+          {" "}
+          <label htmlFor="name">Name</label>
+          <input type="text" name="name" id="name" />
+        </div>
         <div className="cta">
           <button>register</button>
           <Link to="/login">already registered ?</Link>

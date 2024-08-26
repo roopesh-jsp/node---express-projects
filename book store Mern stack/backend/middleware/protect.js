@@ -11,7 +11,7 @@ const protect = asyncHandler(async (req, res, nxt) => {
   ) {
     try {
       token = req.headers.authorization.split(" ")[1];
-      const decode = jwt.verify(token, "secret");
+      const decode = jwt.verify(token, process.env.JWT_SECRECT);
       req.user = await User.findById(decode.id);
       nxt();
     } catch (error) {

@@ -8,13 +8,9 @@ export default function Books() {
   const { getCookie } = useAuth();
   const { token } = getCookie();
   function getBooks() {
-    fetch("http://localhost:3000/books")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setBooks(data);
-      });
+    axios.get("/books").then((res) => {
+      setBooks(res.data);
+    });
   }
   useEffect(() => {
     getBooks();
@@ -31,7 +27,7 @@ export default function Books() {
 
   return (
     <div className="container">
-      {books.length === 0 && <h1>no books found</h1>}
+      {books.length === 0 && <h1 className="center">no books found</h1>}
       {books &&
         books.map((book, idx) => {
           return (

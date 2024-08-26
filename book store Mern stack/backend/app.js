@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 
@@ -18,7 +19,7 @@ app.use(bodyParser.json());
 //   })
 // );
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, DELETE"
@@ -35,11 +36,8 @@ app.use((err, req, res, nxt) => {
   console.log(err);
   res.status(status).json({ message: err.message });
 });
+console.log(process.env.MONGO_STRING);
 
-mongoose
-  .connect(
-    "mongodb+srv://rupesh:1234@backenddb.itmt8yo.mongodb.net/bookStore?retryWrites=true&w=majority&appName=backendDB"
-  )
-  .then(() => {
-    app.listen(3000);
-  });
+mongoose.connect(process.env.MONGO_STRING).then(() => {
+  app.listen(3000);
+});

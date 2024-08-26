@@ -27,15 +27,13 @@ export default function AlterBook() {
       const formdata = new FormData(e.currentTarget);
       const data = Object.fromEntries(formdata);
 
-      axios
-        .post("http://localhost:3000/books/add", { ...data }, { headers })
-        .then((res) => {
-          navigate("/");
-        });
+      axios.post("books/add", { ...data }, { headers }).then((res) => {
+        navigate("/");
+      });
     } else {
       axios
         .put(
-          `http://localhost:3000/books/${id}`,
+          `books/${id}`,
           {
             title,
             author,
@@ -52,7 +50,7 @@ export default function AlterBook() {
   }
 
   function getData() {
-    axios.get(`http://localhost:3000/books/${id}`).then((res) => {
+    axios.get(`books/${id}`).then((res) => {
       setTitle(res.data.title);
       setAuthor(res.data.author);
       setYr(res.data.publishedYr);
@@ -66,27 +64,43 @@ export default function AlterBook() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="stack">
+      <h1>Add book</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="text"
-          name="author"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        />
-        <input
-          type="number"
-          name="publishedYr"
-          value={yr}
-          onChange={(e) => setYr(e.target.value)}
-        />
-        <button>ADD</button>
+        <div className="group">
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            id="title"
+          />
+        </div>
+        <div className="group">
+          <label htmlFor="author">Author</label>
+          <input
+            type="text"
+            name="author"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            id="author"
+          />
+        </div>
+        <div className="group">
+          {" "}
+          <label htmlFor="yr">published year</label>
+          <input
+            type="number"
+            name="publishedYr"
+            value={yr}
+            onChange={(e) => setYr(e.target.value)}
+            id="yr"
+          />
+        </div>
+        <div className="cta">
+          <button>ADD</button>
+        </div>
       </form>
     </div>
   );
