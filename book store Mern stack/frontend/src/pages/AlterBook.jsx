@@ -2,8 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../store/AuthContext";
+import Loader from "../components/Loader";
 export default function AlterBook() {
   const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
+  const buttonRef = useRef();
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -22,6 +25,8 @@ export default function AlterBook() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
+    buttonRef.current.diasbled = true;
     const headers = { Authorization: `Bearer ${token}` };
     if (!edit) {
       const formdata = new FormData(e.currentTarget);
@@ -29,6 +34,8 @@ export default function AlterBook() {
 
       axios.post("books/add", { ...data }, { headers }).then((res) => {
         navigate("/");
+        setLoading(false);
+        buttonRef.current.diasbled = false;
       });
     } else {
       axios
@@ -44,8 +51,14 @@ export default function AlterBook() {
         )
         .then((res) => {
           navigate(`/book/${id}`);
+          setLoading(false);
+          buttonRef.current.diasbled = false;
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setLoading(false);
+          buttonRef.current.diasbled = false;
+          console.log(err);
+        });
     }
   }
 
@@ -65,8 +78,9 @@ export default function AlterBook() {
 
   return (
     <div className="stack">
-      <h1>Add book</h1>
+      <h1>{edit ? "edit" : "add book"}</h1>
       <form onSubmit={handleSubmit}>
+        {loading && <Loader />}
         <div className="group">
           <label htmlFor="title">Title</label>
           <input
@@ -99,7 +113,7 @@ export default function AlterBook() {
           />
         </div>
         <div className="cta">
-          <button>ADD</button>
+          <button ref={buttonRef}>{edit ? "edit" : "add"}</button>
         </div>
       </form>
     </div>

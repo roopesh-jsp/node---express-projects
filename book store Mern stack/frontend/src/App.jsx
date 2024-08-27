@@ -13,7 +13,9 @@ import Mybooks from "./pages/Mybooks";
 import { Toaster } from "react-hot-toast";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:3000/";
+// axios.defaults.baseURL = "https://mern-bookstore-api-okzs.onrender.com/";
+
+axios.defaults.baseURL = "http://localhost:3000";
 const routes = createBrowserRouter([
   {
     path: "/",
