@@ -21,9 +21,9 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    // "https://mern-bookstore-f169.onrender.com/",
-    "http://localhost:5173"
+    "https://mern-bookstore-f169.onrender.com/"
   );
+
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, DELETE"
