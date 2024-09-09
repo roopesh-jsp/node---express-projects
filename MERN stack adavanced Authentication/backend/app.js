@@ -3,7 +3,7 @@ const connectDb = require("./connectDB");
 const dotenv = require("dotenv").config();
 const app = express();
 
-const authRoutes = require("./routes/authRoutes");
+const authRoutes = require("./routes/auth.routes");
 
 app.use(express.json());
 
