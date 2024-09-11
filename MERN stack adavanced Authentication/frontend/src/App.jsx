@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import RootLayout from "./pages/RootLayout";
+import WrapperProtector from "./components/WrapperProtector";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +12,14 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     errorElement: <Error />,
     children: [
-      { index: true, element: <Home /> },
+      {
+        index: true,
+        element: (
+          <WrapperProtector>
+            <Home />
+          </WrapperProtector>
+        ),
+      },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
     ],

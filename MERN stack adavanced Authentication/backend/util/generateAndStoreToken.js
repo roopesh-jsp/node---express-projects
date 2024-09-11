@@ -4,11 +4,7 @@ const generateAndStoreToken = async (userId, res) => {
   const token = jwt.sign({ userId }, "super", { expiresIn: "1d" });
   console.log("kk");
 
-  res.cookie("token", token, {
-    httpOnly: true,
-    sameSite: "strict",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-  });
+  res.cookie("token", token);
   return token;
 };
 module.exports = generateAndStoreToken;
